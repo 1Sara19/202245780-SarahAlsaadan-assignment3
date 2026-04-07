@@ -133,3 +133,31 @@ filterButtons.forEach((button) => {
     }
   });
 });
+
+
+// GitHub API Integration: Fetches repositories from GitHub and displays them dynamically
+const githubContainer = document.getElementById("github-container");
+
+fetch("https://api.github.com/users/1Sara19/repos")
+  .then(response => response.json())
+  .then(data => {
+    githubContainer.innerHTML = "";
+
+    data.slice(0, 5).forEach(repo => {
+      const project = document.createElement("div");
+      project.classList.add("project");
+
+      project.innerHTML = `
+        <h3>${repo.name}</h3>
+        <p>${repo.description || "No description available."}</p>
+        <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+      `;
+
+      githubContainer.appendChild(project);
+    });
+  })
+  .catch(() => {
+    githubContainer.innerHTML = `
+      <p class="error-message">Failed to load projects. Try again later.</p>
+    `;
+  });

@@ -1,28 +1,28 @@
 :root {
-  --bg: #0b1220;
-  --card: #0f1a2e;
-  --text: #e5e7eb;
-  --muted: #a1a1aa;
-  --brand: #c6def1;
-  --accent: #dbcdf0;
-  --highlight: #f2c6de;
+  --bg: #0a0a0f;
+  --card: #13131c;
+  --text: #e8e4dc;
+  --muted: #9a9488;
+  --brand: #c8a96e;
+  --accent: #e8d5a3;
+  --highlight: #c8a96e;
   --border: rgba(255, 255, 255, 0.08);
   --input-bg: rgba(255, 255, 255, 0.03);
-  --shadow: rgba(0, 0, 0, 0.25);
+  --shadow: rgba(0, 0, 0, 0.28);
 }
 
 /* light mode */
 .light {
-  --bg: #ffff;
+  --bg: #f7f2e8;
   --card: #fffaf2;
-  --text: #4b4b4b;
-  --muted: #7a7a7a;
-  --brand: #c6def1;
-  --accent: #dbcdf0;
-  --highlight: #f2c6de;
-  --border: #f7d9c4;
-  --input-bg: rgba(255, 255, 255, 0.55);
-  --shadow: rgba(0, 0, 0, 0.06);
+  --text: #2f2a24;
+  --muted: #746d63;
+  --brand: #b89155;
+  --accent: #d8bf8b;
+  --highlight: #c8a96e;
+  --border: rgba(90, 70, 40, 0.14);
+  --input-bg: rgba(184, 145, 85, 0.05);
+  --shadow: rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -268,4 +268,68 @@ textarea:focus {
 .greeting-notice.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.theme-btn {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.github-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+#github-container .project {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.015));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 1.2rem;
+  min-height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 22px var(--shadow);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+#github-container .project:hover {
+  transform: translateY(-4px);
+  border-color: var(--highlight);
+  box-shadow: 0 14px 30px var(--shadow);
+}
+
+#github-container .project h3 {
+  margin: 0 0 0.8rem;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--text);
+  word-break: break-word;
+}
+
+#github-container .project p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.7;
+  flex-grow: 1;
+}
+
+#github-container .project a {
+  display: inline-block;
+  width: fit-content;
+  margin-top: auto;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+#github-container .project a:hover {
+  color: var(--highlight);
+  border-color: var(--highlight);
 }

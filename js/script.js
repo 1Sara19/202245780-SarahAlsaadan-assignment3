@@ -1,7 +1,7 @@
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// greeting notification based on time
+// Greeting notification based on time
 const notice = document.getElementById("greetingNotice");
 
 if (notice) {
@@ -17,7 +17,6 @@ if (notice) {
   }
 
   notice.textContent = message;
-
   notice.classList.add("show");
 
   setTimeout(() => {
@@ -43,11 +42,9 @@ function setTheme(theme) {
   localStorage.setItem("theme", theme);
 }
 
-// Load saved theme
 const savedTheme = localStorage.getItem("theme") || "dark";
 setTheme(savedTheme);
 
-// Toggle theme on click
 btn.addEventListener("click", () => {
   const currentTheme = root.classList.contains("light") ? "light" : "dark";
   const newTheme = currentTheme === "light" ? "dark" : "light";
@@ -102,55 +99,85 @@ form.addEventListener("submit", (e) => {
   form.reset();
 });
 
-// Project filter by category
+// Project filter + sort
 const filterButtons = document.querySelectorAll(".filter-btn");
-const projects = document.querySelectorAll(".project");
+const projectsGrid = document.getElementById("projectsGrid");
+const projects = Array.from(document.querySelectorAll("#projectsGrid .project"));
 const projectsMessage = document.getElementById("projectsMessage");
+const sortProjects = document.getElementById("sortProjects");
+
+let currentFilter = "all";
+let currentSort = "default";
+
+function updateProjects() {
+  let visibleProjects = projects.filter((project) => {
+    const category = project.dataset.category;
+    return currentFilter === "all" || category === currentFilter;
+  });
+
+  if (currentSort === "az") {
+    visibleProjects.sort((a, b) => {
+      const nameA = a.querySelector("h3").textContent.trim().toLowerCase();
+      const nameB = b.querySelector("h3").textContent.trim().toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+  } else if (currentSort === "za") {
+    visibleProjects.sort((a, b) => {
+      const nameA = a.querySelector("h3").textContent.trim().toLowerCase();
+      const nameB = b.querySelector("h3").textContent.trim().toLowerCase();
+      return nameB.localeCompare(nameA);
+    });
+  }
+
+  projectsGrid.innerHTML = "";
+
+  if (visibleProjects.length === 0) {
+    projectsMessage.textContent = "No projects found in this category.";
+  } else {
+    projectsMessage.textContent = "";
+    visibleProjects.forEach((project) => {
+      projectsGrid.appendChild(project);
+    });
+  }
+}
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    const selectedFilter = button.dataset.filter;
-    let visibleCount = 0;
+    currentFilter = button.dataset.filter;
 
     filterButtons.forEach((btn) => btn.classList.remove("active"));
     button.classList.add("active");
 
-    projects.forEach((project) => {
-      const category = project.dataset.category;
-
-      if (selectedFilter === "all" || category === selectedFilter) {
-        project.style.display = "block";
-        visibleCount++;
-      } else {
-        project.style.display = "none";
-      }
-    });
-
-    if (visibleCount === 0) {
-      projectsMessage.textContent = "No projects found in this category.";
-    } else {
-      projectsMessage.textContent = "";
-    }
+    updateProjects();
   });
 });
 
+sortProjects.addEventListener("change", () => {
+  currentSort = sortProjects.value;
+  updateProjects();
+});
 
-// GitHub API Integration: Fetches repositories from GitHub and displays them dynamically
+// GitHub API Integration
 const githubContainer = document.getElementById("github-container");
 
 fetch("https://api.github.com/users/1Sara19/repos")
-  .then(response => response.json())
-  .then(data => {
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch repositories");
+    }
+    return response.json();
+  })
+  .then((data) => {
     githubContainer.innerHTML = "";
 
-    data.slice(0, 5).forEach(repo => {
+    data.slice(0, 5).forEach((repo) => {
       const project = document.createElement("div");
       project.classList.add("project");
 
       project.innerHTML = `
         <h3>${repo.name}</h3>
         <p>${repo.description || "No description available."}</p>
-        <a href="${repo.html_url}" target="_blank">View on GitHub</a>
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">View on GitHub</a>
       `;
 
       githubContainer.appendChild(project);

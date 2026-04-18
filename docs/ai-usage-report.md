@@ -1,53 +1,69 @@
 # AI Usage Report
 
-## Tools Used & Use Cases
+## Tools Used and How They Were Applied
 
 ### ChatGPT
-- I used ChatGPT to understand key concepts in HTML, CSS, and JavaScript.
-- It helped me implement interactive features such as:
-  - Theme toggle with localStorage
-  - Dynamic greeting message based on time
-  - Project filtering functionality
-  - Form validation and user feedback messages
-- It also assisted in debugging issues and improving code structure.
+I used ChatGPT as a learning tool. It helped me understand HTML, CSS, and JavaScript concepts.
+
+It supported me in:
+- understanding how to build a theme toggle using localStorage
+- validating the contact form and showing user feedback messages
+- integrating the GitHub API to fetch and display repositories dynamically
 
 ### GitHub Copilot
-- I used GitHub Copilot to generate initial code suggestions.
-- It helped with:
-  - Structuring HTML sections (About, Projects, Contact)
-  - Writing CSS for layout and responsiveness
-  - Suggesting JavaScript snippets for interactivity
+I used GitHub Copilot mainly for code suggestions and faster drafting during implementation. It was useful for producing initial code patterns that I could then review and customize.
 
----
+Copilot helped with:
+- generating starting structures for HTML sections
+- suggesting CSS rules for layout, cards, responsiveness, and styling
+- proposing JavaScript snippets for DOM interaction and event handling
 
-## Benefits & Challenges
+## Benefits of Using AI Tools
 
-### Benefits
-- Faster development and implementation of features
-- Better understanding of JavaScript logic and DOM manipulation
-- Improved UI/UX through AI-generated suggestions
-- Helped in organizing and structuring the project
+Using AI tools provided several benefits during this assignment:
 
-### Challenges
-- Some AI-generated code did not fully match assignment requirements
-- Certain suggestions required modification to fit the project structure
-- I needed to debug and test the code manually to ensure correctness
+- It helped me better understand JavaScript logic, especially DOM manipulation, event handling, and dynamic updates.
+- It improved the quality of the user experience by suggesting interactive features and cleaner interface behavior.
+- It supported me in implementing more advanced functionality such as filtering, and API-based content loading.
+- It helped me interpret technical evaluation tools such as Lighthouse and understand how to improve the website further.
 
----
+## Challenges and Limitations
+
+- Some generated code did not fully match the assignment requirements.
+- Some suggestions worked as general examples but needed modification to fit my actual file structure and design.
+
+## Risks of Using AI and How I Managed Them
+
+### Possible Risks
+- accepting incorrect or incomplete code without noticing errors
+- relying too much on AI instead of understanding the implementation
+- introducing unnecessary or overly complex code
+- including suggestions that do not match the intended design or user experience
+
+### How I Managed These Risks
+- I reviewed all AI-generated suggestions before using them.
+- I tested each feature manually in the browser to confirm it worked correctly.
+- I made sure I understood the purpose of each important feature before keeping it in the final submission.
 
 ## Learning Outcomes
 
-- I improved my skills in HTML, CSS, and JavaScript by building an interactive portfolio website
-- I learned how to implement dynamic features such as filtering and theme persistence
-- I gained experience using localStorage for data handling
-- I improved my problem-solving skills by debugging AI-generated code
-- I learned how to use AI tools as a support system rather than relying on them completely
+This assignment helped me develop both technical skills and better judgment in using AI tools.
 
----
+Through this work, I learned:
+- how to build an interactive portfolio website using HTML, CSS, and JavaScript
+- how to implement dynamic front-end features such as filtering, sorting, and theme persistence
+- how to use `localStorage` to preserve user preferences
+- how to validate form input and display feedback messages clearly
+- how to fetch and display real data from the GitHub API
+- how to use AI as a support tool for learning, productivity, and problem solving
 
-## Responsible Use & Modifications
+## Responsible Use and Personal Contribution
 
-- I carefully reviewed all AI-generated code before using it
-- I modified and adapted the code to meet assignment requirements
-- I ensured that I understood how each feature works before implementing it
-- AI was used as a learning and support tool, not as a replacement for my own work
+My responsible use of AI included:
+- using AI as a support and learning tool 
+- reviewing and editing generated code before adding it to the project
+- testing features manually
+- making design and implementation decisions myself
+
+
+In conclusion, AI tools were useful in helping me learn faster and develop the project more efficiently, but the final implementation required my own evaluation, modification, and validation.

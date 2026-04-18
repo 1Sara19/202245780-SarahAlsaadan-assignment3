@@ -2,77 +2,132 @@
 
 ## Project Overview
 
-This project is a personal portfolio website developed using HTML, CSS, and JavaScript.
-It was enhanced in Assignment 2 by adding dynamic features, data handling, and improved user interaction.
+This project is a personal portfolio website developed using HTML, CSS, and JavaScript. It presents personal information, selected projects, GitHub repositories, and a contact form in a clean, responsive, and interactive interface.
 
-## Project Structure
+Compared to the earlier version, this portfolio includes more advanced functionality such as project sorting, and GitHub API integration.
 
-- `index.html` → Defines the main structure and content of the website (About, Projects, Contact)
-- `css/styles.css` → Handles styling, layout, themes, and responsive design
-- `js/script.js` → Implements interactivity, dynamic content, and data handling
-- `assets/images/` → Stores project images
-- `docs/` → Contains documentation files (AI usage report and technical documentation)
+## Main Features and Implementation
 
-## Features Implementation
+### 1. Theme Toggle and Theme Persistence
 
-### 1. Theme Toggle (Dark/Light Mode)
+The website supports both dark mode and light mode using JavaScript and CSS custom properties. When the user clicks the theme button, the theme changes immediately, the button icon updates, and the selected theme is saved in `localStorage`. When the page is reopened, the saved theme is loaded automatically.
 
-- Implemented using JavaScript and CSS variables
-- The selected theme is saved using `localStorage`
-- The theme is applied automatically when the page loads
+#### Example code snippet
+
+    function setTheme(theme) {
+      if (theme === "light") {
+        root.classList.add("light");
+        btn.textContent = "🌙";
+        btn.setAttribute("aria-label", "Switch to dark mode");
+      } else {
+        root.classList.remove("light");
+        btn.textContent = "☀️";
+        btn.setAttribute("aria-label", "Switch to light mode");
+      }
+
+      localStorage.setItem("theme", theme);
+    }
+
+This improves usability because the website remembers the user’s preference.
 
 ### 2. Dynamic Greeting Message
 
-- Displays a greeting based on the current time (morning, afternoon, evening)
-- Implemented using JavaScript `Date` object
-- Appears as a temporary notification on page load
+A greeting message appears when the page loads and changes depending on the current time of day: morning, afternoon, or evening. This was implemented using the JavaScript Date object and conditional statements.
 
-### 3. Project Filtering
+#### Example code snippet
 
-- Users can filter projects by category (All, Web, Database)
-- Implemented using `data-*` attributes and event listeners
-- Projects are shown/hidden dynamically without reloading the page
+    const hour = new Date().getHours();
+    let message = "";
 
-### 4. Contact Form Validation
+    if (hour < 12) {
+      message = "Good morning!";
+    } else if (hour < 18) {
+      message = "Good afternoon!";
+    } else {
+      message = "Good evening!";
+    }
 
-- Validates user input (name, email, message)
-- Uses regular expressions for email validation
-- Displays success or error messages dynamically
+The greeting appears briefly as a notification.
 
-### 5. User Feedback
+### 3. Project Filtering and Sorting
 
-- Error messages for invalid inputs
-- Success message after form submission
-- Message displayed when no projects match the selected filter
+The Projects section allows users to filter projects by category such as All, Web, and Database. It also allows sorting project titles alphabetically from A to Z or Z to A.
 
-### 6. User Interaction
+Each project card uses a data-category attribute, and JavaScript updates the visible projects dynamically based on the selected filter or sort option.
 
-Users can interact with the interface by clicking filter buttons, submitting the contact form, and toggling between themes. The system provides immediate feedback to guide user actions.
+#### Example code snippet
 
-## Design and Layout
+    currentFilter = button.dataset.filter;
 
-- CSS Grid is used for the projects section layout
-- Flexbox is used for navigation and controls
-- Media queries ensure responsiveness across devices (mobile, tablet, desktop)
+    if (currentSort === "az") {
+      visibleProjects.sort((a, b) => {
+        const nameA = a.querySelector("h3").textContent.trim().toLowerCase();
+        const nameB = b.querySelector("h3").textContent.trim().toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
+    }
 
-## Styling Approach
+This improves browsing because users can organize the displayed projects without reloading the page.
 
-- Uses CSS variables for consistent theming (colors, backgrounds, borders)
-- Smooth transitions are applied for better user experience
-- Hover effects are used on buttons and project cards
+### 4. GitHub API Integration
 
-## Responsiveness
+The website connects to the GitHub API to display repositories dynamically. Instead of hardcoding repository information in HTML, the JavaScript file fetches the data and creates repository cards automatically.
 
-- The layout adapts using media queries
-- Grid switches to a single column on smaller screens
-- Navigation adjusts for different screen sizes
+#### Example code snippet
 
-## Data Handling
+    fetch("https://api.github.com/users/1Sara19/repos")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to fetch repositories");
+        }
+        return response.json();
+      })
 
-- `localStorage` is used to store user theme preference
-- Form input is validated before processing
-- Dynamic UI updates based on user interaction
+After fetching the data, the page shows repository names, descriptions, and links. If the request fails, an error message appears.
+
+## Design and Responsiveness
+
+The layout was designed to be clean, readable, and responsive. CSS Grid is used for project cards, Flexbox is used for navigation and controls, and media queries adjust the layout for smaller screens.
+
+#### Example code snippet
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+    }
+
+The website works across desktop, tablet, and mobile screen sizes.
+
+## Testing
+
+The website was tested manually in the browser to verify that all interactive features work correctly and produce the expected results.
+
+The testing included the following checks and outcomes:
+
+- Theme toggle: switching between light mode and dark mode worked correctly.
+- Theme persistence: the selected theme remained saved after refreshing the page because it was stored in localStorage.
+- Greeting message: the greeting changed correctly depending on the time of day (morning, afternoon, evening).
+- Project filtering: selecting a category displayed only the matching projects.
+- Project sorting: the projects were sorted correctly in alphabetical order from A to Z and from Z to A.
+- Contact form validation: error messages appeared when fields were empty or the email format was invalid.
+- GitHub API integration: repositories loaded successfully from the GitHub API and were displayed dynamically on the page.
+
+### Lighthouse Results
+
+Lighthouse testing was also used to evaluate the website quality. The desktop results were:
+
+- Performance: 100
+- Accessibility: 100
+- SEO: 100
+- Best Practices: 78
+
+These results showed that the website performed very well in most areas. The lower Best Practices score was mainly related to local testing over HTTP instead of HTTPS, not to a major issue in the website functionality itself.
 
 ## Conclusion
 
-The project demonstrates the use of modern front-end development techniques including dynamic content updates, data handling, and user interaction improvements compared to Assignment 1.
+This project demonstrates front-end development skills using HTML, CSS, and JavaScript. It includes dynamic features, API integration, state persistence, form validation, and structured documentation.
